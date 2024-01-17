@@ -1,0 +1,52 @@
+PL:https://leetcode.com/problems/longest-increasing-subsequence/description/?envType=daily-question&envId=2024-01-05
+SL:https://leetcode.com/problems/longest-increasing-subsequence/solutions/4513134/easy-solution-cpp/
+
+SOLUTION : 
+ 
+   CPP :
+
+     APPROACH 1 (BEST) : 
+
+       TIME COMPLEXITY : O(NLOGN) 
+       SPACE COMPLEXITY : O(N)
+
+       class Solution {
+            public:
+                int lengthOfLIS(vector<int>& nums) {
+                    int n = nums.size();
+                    vector<int>ans;
+                    for(int i = 0 ; i < n ; i++){
+                        int lower = lower_bound(ans.begin(),ans.end(),nums[i]) - ans.begin();
+                        if(lower<ans.size()){
+                            ans[lower] = nums[i] ;
+                        }
+                        else{
+                            ans.push_back(nums[i]);
+                        }
+                    }
+                    return ans.size();
+                }
+            };
+
+     APPRAOCH 2 :
+       
+        TIME COMPLEXITY : O(N^2) 
+        SPACE COMPLEXITY : O(N)
+
+        class Solution {
+            public:
+                int lengthOfLIS(vector<int>& nums) {
+                    int n = nums.size();
+                    vector<int>lis(n,1);
+                    for(int i = n-1 ; i >= 0 ;i--){
+                        for(int j = i+1 ; j < n ; j++){
+                            if(nums[i]<nums[j]){
+                                lis[i] = max(lis[i],1+lis[j]);
+                            }
+                        }
+                    }
+                    return *max_element(lis.begin(),lis.end());
+                }
+            };
+       
+

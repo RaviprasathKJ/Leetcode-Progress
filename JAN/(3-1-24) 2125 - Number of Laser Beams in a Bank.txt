@@ -1,0 +1,48 @@
+PL:https://leetcode.com/problems/number-of-laser-beams-in-a-bank/description/?envType=daily-question&envId=2024-01-03
+
+SL:https://leetcode.com/problems/number-of-laser-beams-in-a-bank/solutions/4498673/counting-solution-c-python/?envType=daily-question&envId=2024-01-03
+
+
+SOLUTION : 
+  Time complexity:O(n^2)
+  Space complexity:O(1)
+ 
+ 
+
+  CPP :
+
+     class Solution {
+        public:
+            int numberOfBeams(vector<string>& bank) {
+                int ans = 0  ;
+                int m = bank.size() ;
+                int n = bank[0].size();
+                int prev = 0 ;
+                for(int i = 0 ; i < m ; i++){
+                    int count = 0 ;
+                    for(int j = 0 ; j < n ; j++){
+                        if(bank[i][j]=='1') count++;
+                    }
+                    ans+=(prev*count);
+                    if(count!=0) prev=count;
+                }
+                return ans;
+            }
+        }; 
+ 
+    PYTHON : 
+        
+        class Solution:
+            def numberOfBeams(self, bank: List[str]) -> int:
+                ans = 0
+                m = len(bank)
+                n = len(bank[0])
+                prev = 0 
+                for i in range(m):
+                    count = 0 
+                    for j in range(n):
+                        if(bank[i][j]=='1'):
+                            count+=1
+                    ans+=(prev*count)
+                    if(count!=0): prev = count
+                return ans

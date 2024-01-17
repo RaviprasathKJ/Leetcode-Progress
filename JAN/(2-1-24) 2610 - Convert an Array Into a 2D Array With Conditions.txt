@@ -1,0 +1,57 @@
+PL : https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/description/
+
+SL : https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/solutions/4492618/easy-hash-map-solution-cpp/
+
+SL : [https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/solutions/4493330/hashmap-](https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/solutions/4493330/hashmap-python/)
+
+
+SOLUTION : 
+
+   Time complexity:O(n)
+   Space complexity:O(u) -> unique element in nums
+ 
+   CPP : 
+
+     class Solution {
+        public:
+            vector<vector<int>> findMatrix(vector<int>& nums) {
+                ios::sync_with_stdio(false);
+                cin.tie(0);
+                cout.tie(0);
+                unordered_map<int,int>map;
+                for(auto i : nums) map[i]++;
+                vector<vector<int>>arr;
+                while(1){
+                    vector<int>temp;
+                    for(auto i : map){
+                        if(i.second!=0){
+                            map[i.first]--;
+                            temp.push_back(i.first);
+                        }
+                    }
+                    if(temp.size()==0) break;
+                    arr.push_back(temp);
+                }
+                return arr;
+            }
+        };
+
+    PYTHON: 
+         class Solution:
+            def findMatrix(self, nums: List[int]) -> List[List[int]]:
+                map = dict()
+                for i in nums:
+                    if i  in map:
+                        map[i]+=1
+                    else :
+                        map[i]=1
+                ans=[]
+                while(1):
+                    temp=[]
+                    for i in map:
+                        if(map[i]>0):
+                            map[i]-=1
+                            temp.append(i)
+                    if(len(temp)==0): return ans
+                    ans.append(temp)
+                return ans
