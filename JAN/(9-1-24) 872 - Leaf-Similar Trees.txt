@@ -1,0 +1,32 @@
+PL : https://leetcode.com/problems/leaf-similar-trees/?envType=daily-question&envId=2024-01-09
+SL : https://leetcode.com/problems/leaf-similar-trees/solutions/4556784/recurrsion-cpp
+
+SOLUTION : 
+ 
+    CPP : 
+           Time complexity:O (2*n)
+           Space complexity:O (2*n)
+
+   class Solution {
+        public:
+            void solve(TreeNode* root ,vector<int> &arr){
+                if(root){
+                    if((root->left==NULL)&&(root->right==NULL)) arr.push_back(root->val) ;
+                    else{
+                        solve(root->left,arr);
+                        solve(root->right,arr);
+                    }
+                }
+            }
+            bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+                vector<int>arr1;
+                vector<int>arr2;
+                solve(root1,arr1);
+                solve(root2,arr2);
+                if(arr1.size()!=arr2.size()) return false;
+                for(int i = 0 ; i < arr1.size() ;i++){
+                    if(arr1[i]!=arr2[i]) return false;
+                }
+                return true;
+            }
+        };

@@ -1,0 +1,32 @@
+PL : https://leetcode.com/problems/range-sum-of-bst/submissions/1140449114/?envType=daily-question&envId=2024-01-08 
+SL : https://leetcode.com/problems/range-sum-of-bst/solutions/4528863/recurssion/
+
+SOLUTION : 
+
+ CPP : 
+ Time complexity:O(n)
+ Space complexity:O(1)
+      
+        class Solution {
+        public:
+            void  solve(TreeNode* root,int low ,int high,int &sum){
+                if(root){
+                    if((root->val>=low)&&(root->val<=high)) sum+=root->val;
+                    solve(root->left,low,high,sum);
+                    solve(root->right,low,high,sum);
+                }
+
+            }
+            int rangeSumBST(TreeNode* root, int low, int high) {
+                int ans = 0 ;
+                solve(root,low,high,ans);
+                return ans;
+            }
+        };
+
+
+
+
+
+
+        

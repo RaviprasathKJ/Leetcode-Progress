@@ -1,0 +1,9 @@
+PL : https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/description/?envType=daily-question&envId=2024-01-10
+
+SL : https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/solutions/4573753/bfs-lot-graph
+
+
+SOLUTION : 
+
+
+ CPP 
