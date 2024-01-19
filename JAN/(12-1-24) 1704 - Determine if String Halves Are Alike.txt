@@ -1,0 +1,30 @@
+PL : https://leetcode.com/problems/determine-if-string-halves-are-alike/description/?envType=daily-question&envId=2024-01-12
+
+SL : https://leetcode.com/problems/determine-if-string-halves-are-alike/solutions/4556849/hash-map-solution-cpp/
+
+
+SOLUTION : 
+
+
+ CPP : 
+
+   Time complexity:O(N)
+   Space complexity:O(N)
+
+
+    class Solution {
+            public:
+                bool halvesAreAlike(string s) {
+                    int c = 0 , n= s.size();
+                    unordered_map<char,int>map{{'a',1},{'e',1},{'o',1},{'i',1},{'u',1}};
+                    for(int i = 0 ; i < n/2 ;i++) {
+                        if(map[tolower(s[i])]) c++;
+                    }
+                    for(int i = n/2 ; i < n ;i++){
+                        if(map[tolower(s[i])]) c--;
+                    }
+                    if(c==0) return true;
+                    return false;
+                }
+            };
+

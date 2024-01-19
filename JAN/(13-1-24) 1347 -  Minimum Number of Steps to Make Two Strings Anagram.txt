@@ -1,0 +1,53 @@
+PL : https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/?envType=daily-question&envId=2024-01-13
+
+SL : https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/?envType=daily-question&envId=2024-01-13
+
+
+
+SOLUTION : 
+ 
+ Time complexity:O(n)
+ Space complexity:O(n)
+
+
+ CPP :
+        
+       class Solution {
+            public:
+                int minSteps(string s, string t) {
+                    int  n = s.size();
+                    unordered_map<char,int>map;
+                    for(int i = 0 ; i < n ; i++){
+                        map[s[i]]++;
+                        map[t[i]]--;
+                    }
+                    int ans = 0 ;
+                    for(auto i : map) {
+                        if( i.second >= 1 ) ans += i.second ;
+                    }
+                    return ans ; 
+                }
+            };
+            
+
+PYTHON : 
+
+
+    class Solution:
+            def minSteps(self, s: str, t: str) -> int:
+                map = {}
+                for i in zip(s,t):
+                    if i[0] in map:   
+                    map[i[0]]+=1
+                    else:
+                        map[i[0]] =1
+                    if i[1] in map:
+                    map[i[1]]-=1
+                    else:
+                        map[i[1]] = -1
+                ans = 0 
+                for i in map:
+                    print(map[i])
+                    if map[i]>=1 : ans+=map[i]
+                return ans
+

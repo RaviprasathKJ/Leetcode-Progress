@@ -7,3 +7,64 @@ SOLUTION :
 
 
  CPP 
+
+
+    class Solution {
+            private:
+            int ans = 0 ;
+
+            public:
+
+                void solve(TreeNode* root,int start ,int parent ,unordered_map<int,vector<int>> &adj){
+                if(root){
+                    adj[root->val].push_back(parent) ;
+                    if(root->left){ 
+                        adj[root->val].push_back(root->left->val);
+                        solve( root->left,start ,root->val , adj );
+                    }
+                    if(root->right){
+                    adj[root->val].push_back(root->right->val) ;
+                    solve( root->right,start , root->val , adj );
+                    }      
+                }
+                }
+
+
+                void bfs(int root , unordered_map<int,vector<int>> &adj){
+                    queue<int>q;
+                    unordered_map<int,bool>vis;
+                    q.push(root);
+                    while(!q.empty()){
+                        int size = q.size() ;
+                        for(int i = 0 ; i < size ; i++){
+                            int top = q.front();
+                            vis[top] = true ;
+                            q.pop() ;
+                            for(auto i : adj[top]){
+                            if(!vis[i]){
+                                q.push(i);
+                                vis[i] = true ;
+                            }
+                            }
+                        }
+                        ans++;
+                    }
+                }
+
+
+                int amountOfTime(TreeNode* root, int start){
+                    unordered_map<int,vector<int>>adjList; 
+                    if(root->left){
+                    solve(root->left,start,root->val,adjList);
+                    adjList[root->val].push_back(root->left->val);
+                    }
+                    if(root->right){
+                    solve(root->right,start,root->val,adjList);
+                    adjList[root->val].push_back(root->right->val);
+                    }
+
+                    bfs(start,adjList);
+                    
+                    return ans-1;
+                }
+            };

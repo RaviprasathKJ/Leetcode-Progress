@@ -1,0 +1,37 @@
+PL : https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/description/?envType=daily-question&envId=2024-01-11
+
+SL : https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/solutions/4556859/recurrsion-cpp-100-beats/
+
+
+SOLUTION : 
+
+
+ CPP:
+   Time complexity:O(n)
+   Space complexity:O(1)
+
+
+
+   class Solution {
+        private:
+        int ans = 0 ;
+        public:
+            void solve(TreeNode* root , int mini ,int maxi){
+                if(root){
+                        ans = max(ans,abs(mini-(root->val))) ;
+                        ans = max(ans,abs(maxi-(root->val))) ;
+                        mini = min(mini , root->val) ;
+                        maxi = max(maxi,root->val);
+                        solve(root->left,mini,maxi);
+                        solve(root->right,mini,maxi);
+                }
+            }
+
+            int maxAncestorDiff(TreeNode* root) {
+                int mini = root->val ;
+                int maxi = root->val ;
+                if(root->left) solve(root->left,mini,maxi);
+                if(root->right) solve(root->right,mini,maxi);
+                return ans ;
+            }
+        };

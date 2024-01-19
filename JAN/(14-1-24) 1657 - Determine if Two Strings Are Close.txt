@@ -1,0 +1,38 @@
+PL : https://leetcode.com/problems/determine-if-two-strings-are-close/description/?envType=daily-question&envId=2024-01-14
+
+SL : https://leetcode.com/problems/determine-if-two-strings-are-close/solutions/4568444/hash-map-solution-cpp/
+
+
+SOLUTION : 
+ 
+
+  CPP : 
+    Time complexity: O(N LOG N)
+    Space complexity:O( 3N )
+
+  
+    class Solution {
+        public:
+            bool closeStrings(string word1, string word2) {
+                if(word1.size()!=word2.size()) return false ;
+                unordered_map<char,int>map1,map2;
+                for(auto i : word1) map1[i]++;
+                for(auto i : word2) map2[i]++;
+                
+                for(auto i : map1){
+                    if(map2[i.first]==0) return false;
+                }
+
+                vector<pair<char,int>>arr1(map1.begin() , map1.end()) ;
+                vector<pair<char,int>>arr2(map2.begin() , map2.end()) ;
+                auto compare = [](const auto &a ,const auto &b){
+                    return a.second > b.second ;
+                };
+                sort(arr1.begin(),arr1.end(),compare) ;
+                sort(arr2.begin(),arr2.end(),compare) ;
+                for(int i = 0 ; i < arr1.size() ; i++){
+                    if(arr1[i].second!=arr2[i].second) return false;
+                }
+                return true;
+            }
+        };
