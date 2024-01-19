@@ -38,3 +38,35 @@ SOLUTION :
                 return ans ;
             }
         };
+    
+    PYTHON BOTTOM-UP APPROACH DP
+
+        python code  ippa tha panna
+class Solution:
+    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        dp = []
+        rows = len(matrix)
+        cols = len(matrix[0])
+        # Creation of dp array 
+        for i in range(rows):
+            temp = [float("inf")] * cols 
+            dp.append(temp)
+
+        ans = float("inf")
+        # Base case for dp 
+        for i in range(0, cols):
+            dp[rows - 1][i] = matrix[rows - 1][i]
+
+        for r in range(rows - 2, -1, -1):
+            for c in range(0, cols):
+                path_sum = matrix[r][c]
+                if c == 0:
+                    path_sum += min(dp[r + 1][c], dp[r + 1][c + 1])
+                elif c == cols - 1:
+                    path_sum += min(dp[r + 1][c - 1], dp[r + 1][c])
+                else:
+                    path_sum += min(dp[r + 1][c + 1], min(dp[r + 1][c], dp[r + 1][c - 1]))
+                dp[r][c] = path_sum
+        for i in dp[0]:
+            ans = min(ans, i)
+        return ans
