@@ -10,4 +10,31 @@ SOLUTION :
        Time complexity:O(n^m)
        Space complexity:O(n^m)
 
-   
+   class Solution {
+        private:
+        int solve(vector<vector<int>> &dp , vector<vector<int>> &matrix, int r , int c ){
+            if(r == matrix.size()) return 0;
+            if( ( c < 0 ) || ( c >= matrix[0].size() ) ) return 0 ;
+            if(dp[r][c]!=INT_MAX) return dp[r][c] ;
+            int sum = matrix[r][c] ;
+            if(c == 0){
+                return dp[r][c] = min( sum + solve(dp,matrix,r+1,c) , sum + solve(dp,matrix,r+1,c+1) ) ;
+            }
+            else if(c==matrix[0].size()-1){
+                return dp[r][c] = min(sum + solve(dp,matrix,r+1,c) , sum + solve(dp,matrix,r+1,c-1) ) ;
+            }
+            else{
+                return dp[r][c] = min(sum + solve(dp,matrix,r+1,c-1),min(sum + solve(dp,matrix,r+1,c),sum + solve(dp,matrix,r+1,c+1))) ; 
+            }
+        }
+
+        public:
+            int minFallingPathSum(vector<vector<int>>& matrix) {
+                vector<vector<int>>dp(matrix.size(),vector<int>(matrix[0].size(),INT_MAX));
+                int ans = INT_MAX ;
+                for(int i = 0 ; i < matrix.size() ; i++){
+                    ans = min(ans, solve(dp,matrix,0,i)) ;
+                }
+                return ans ;
+            }
+        };
