@@ -9,6 +9,7 @@ Check my progress [Don't press](https://fearless-bookcase-40c.notion.site/CODE-Q
 
 [My LC account](https://leetcode.com/raviprasath/)
 
+**Any ideas in increasing the efficiency of the repo is welcome : ) post it in issues **
 
 Happy coding  : ) 
 
