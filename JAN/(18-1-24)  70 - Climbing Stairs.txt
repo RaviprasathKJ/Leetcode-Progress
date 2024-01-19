@@ -1,0 +1,32 @@
+PL : https://leetcode.com/problems/climbing-stairs/submissions/1149885307/?envType=daily-question&envId=2024-01-18
+
+SL : https://leetcode.com/problems/climbing-stairs/solutions/4588081/fibonacci-o-n/
+
+
+
+
+SOLUTION : 
+  
+
+   CPP : 
+
+     Time complexity:O(N)
+     Space complexity:O(1)
+ 
+
+    class Solution {
+        public:
+            int climbStairs(int n) {
+                int prev2 = 1 ;
+                int prev = 1;
+                int curr = 1;
+                for(int i = 1 ;i <n;i++){
+                    curr = prev+prev2;
+                    prev2 =prev ;
+                    prev = curr;
+                }
+                return curr;
+            }
+        };
+     
+

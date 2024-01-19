@@ -1,0 +1,67 @@
+PL : https://leetcode.com/problems/unique-number-of-occurrences/?envType=daily-question&envId=2024-01-17
+
+SL : https://leetcode.com/problems/unique-number-of-occurrences/solutions/4579316/rust-python-cpp-hashmap-solution
+
+
+
+SOLUTION :  
+
+
+    RUST : 
+        
+        use std::collections::HashMap ;
+
+        impl Solution {
+            pub fn unique_occurrences(arr: Vec<i32>) -> bool {
+                let mut map = HashMap::new() ;
+                let mut count = HashMap::new();
+
+                for &i in &arr {
+                    *map.entry(i).or_insert(0) += 1;
+                }
+
+                for &i in map.values(){
+                    if (count.contains_key(&i)){
+                        return false ;
+                    } 
+                    count.insert(i,1);
+                }
+                return true;
+            }
+        }
+
+
+        CPP : 
+         
+         class Solution {
+            public:
+                bool uniqueOccurrences(vector<int>& arr) {
+                unordered_map<int,int>map;
+                unordered_map<int,int>count;
+                for(auto i: arr) map[i]++;
+                for(auto i : map){
+                    if(count[i.second]!=0) return false; 
+                    count[i.second] = 1 ;
+                }
+                return true;
+                }
+            };
+
+
+        PYTHON : 
+
+         class Solution:
+            def uniqueOccurrences(self, arr: List[int]) -> bool:
+                map = {}
+                count = {} 
+                for i in arr:
+                    if i in map:
+                        map[i] += 1
+                    else:
+                        map[i] = -1
+                for v in map.values():
+                    if v in count:
+                        return False
+                    count[v] = 1
+                return True
+            

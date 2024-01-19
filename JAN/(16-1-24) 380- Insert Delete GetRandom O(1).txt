@@ -1,0 +1,54 @@
+PL: https://leetcode.com/problems/insert-delete-getrandom-o1/description/?envType=daily-question&envId=2024-01-16
+
+SL : https://leetcode.com/problems/insert-delete-getrandom-o1/solutions/4573570/hashmap-array-c
+
+
+SOLUTION : 
+ 
+
+  CPP: 
+     
+    Time complexity:O(1)
+    Space complexity:O(N)
+
+    class RandomizedSet {
+
+            private:
+
+                unordered_map<int,pair<int,int>>map; 
+                vector<int>arr ;
+
+            public:
+
+                    RandomizedSet() {     
+                    }
+                    
+                    bool insert(int val) {
+                        if(map[val].first == 1) return false;
+                        else{
+                        map[val] = {1,arr.size()} ;
+                        arr.push_back(val);
+                        return true;
+                        }
+                    }
+                    
+                    bool remove(int val) {
+                        if(map[val].first == 1){
+                        map[arr[arr.size()-1]].second = map[val].second ;
+                        arr[map[val].second] = arr[arr.size()-1] ;
+                        arr.pop_back() ;
+                        map[val].first = -1 ;  
+                        return true ;
+                        }
+                        return false ; 
+                    }
+                    
+                    int getRandom() {
+                        int ind = rand()%arr.size() ;
+                        return arr[ind];
+                    }
+
+            };
+
+
+
