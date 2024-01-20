@@ -1,0 +1,14 @@
+PL : https://leetcode.com/problems/sum-of-subarray-minimums/description/
+
+SL : https://leetcode.com/problems/sum-of-subarray-minimums/solutions/4599053/monotonic-stack-c/
+
+CREDITS : ARYAN MITTAL 
+
+SOLUTION : 
+
+ CPP : 
+     Time complexity: O(N)
+     Space complexity: O(N)
+
+       
+
