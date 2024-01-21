@@ -1,0 +1,48 @@
+PL : https://leetcode.com/problems/sum-of-subarray-minimums/description/
+
+SL : https://leetcode.com/problems/sum-of-subarray-minimums/solutions/4599053/monotonic-stack-c/
+
+CREDITS : ARYAN MITTAL 
+
+SOLUTION : 
+
+ CPP : 
+     Time complexity: O(N)
+     Space complexity: O(N)
+
+        #define mod 1000000007
+        class Solution {
+                public:
+                    int sumSubarrayMins(vector<int>& arr) {
+                        int ans = 0 , n = arr.size() ;
+                        vector<int>left(n,0),right(n,0) ;
+                        stack<pair<int,int>>st_left,st_right;
+
+                        for(int i = 0 ; i < n ; i++ ){
+                            int count = 1 ;
+                            while((!st_left.empty()) && (st_left.top().first > arr[i]) ){
+                                count+=st_left.top().second ;
+                                st_left.pop() ;
+                            }
+                            st_left.push({arr[i],count}) ;
+                            left[i] = count ; 
+                        }
+
+                        for(int i = n-1 ; i >=0 ; i--){
+                            int count = 1 ;
+                            while((!st_right.empty()) && (st_right.top().first >= arr[i])){
+                                count+=st_right.top().second ;
+                                st_right.pop() ;
+                            }
+                            st_right.push({arr[i],count});
+                            right[i] = count ;
+                        }
+                        for(int i = 0 ; i < n ; i++){
+                        ans = (ans + (arr[i]*(long long)(right[i]*left[i])%mod)%mod)%mod;
+                        }
+                        return ans;
+                    }
+                };
+
+       
+

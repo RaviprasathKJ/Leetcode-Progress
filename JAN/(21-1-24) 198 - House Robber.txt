@@ -1,0 +1,56 @@
+PL : https://leetcode.com/problems/house-robber/description/?envType=daily-question&envId=2024-01-21
+
+SL : https://leetcode.com/problems/house-robber/solutions/4601460/dp-three-approaches-cpp
+
+SOLUTION : 
+
+  CPP :
+     MOST OPTIMAL : 
+      
+        Time complexity:O(n)
+        Space complexity:O(1)
+
+      class Solution {
+            public:
+                int rob(vector<int>& nums) {
+                    ios::sync_with_stdio(false);
+                    cin.tie(NULL);
+                    cout.tie(NULL);
+                    int n = nums.size() ;
+                    if(n==1) return nums[0] ;
+                    else if(n==2) return max(nums[0],nums[1]) ;
+                    int prev2 = nums[0] ;
+                    int prev1 = max(nums[0],nums[1]) ;
+                    int curr = prev1 ;
+                    for(int i = 2 ; i < n ; i++ ){
+                        curr = max(prev2+nums[i],prev1);
+                        prev2 = prev1 ;
+                        prev1 = curr ;
+                    }
+                    return curr;
+
+                }
+            };
+
+  Rust : 
+       use std::cmp::max;
+        impl Solution {
+            pub fn rob(nums: Vec<i32>) -> i32 {
+                let n = nums.len() ;
+                if(n==1){
+                    return nums[0]  ;
+                }
+                else if(n==2){
+                    return max(nums[0],nums[1]) ;
+                }
+                let mut prev2 : i32 = nums[0] ;
+                let mut prev1 : i32 = max(nums[0],nums[1]) ;
+                let mut curr = prev1 ;
+                for i in 2..n{
+                    curr = max(prev2+nums[i],prev1) ;
+                    prev2 = prev1 ;
+                    prev1 = curr ;
+                }
+                return curr;
+            }
+        }
