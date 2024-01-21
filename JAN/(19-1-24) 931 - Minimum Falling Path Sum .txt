@@ -70,3 +70,4 @@ SOLUTION :
            for i in dp[0]:
                ans = min(ans, i)
            return ans
+
