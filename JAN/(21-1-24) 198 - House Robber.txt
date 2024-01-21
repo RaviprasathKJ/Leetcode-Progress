@@ -34,23 +34,23 @@ SOLUTION :
 
   Rust : 
        use std::cmp::max;
-
-impl Solution {
-    pub fn solve(nums: &Vec<i32> , dp : &mut Vec<i32> , i : usize) -> i32 {
-        if(i>=nums.len()){
-          return 0 ;
+        impl Solution {
+            pub fn rob(nums: Vec<i32>) -> i32 {
+                let n = nums.len() ;
+                if(n==1){
+                    return nums[0]  ;
+                }
+                else if(n==2){
+                    return max(nums[0],nums[1]) ;
+                }
+                let mut prev2 : i32 = nums[0] ;
+                let mut prev1 : i32 = max(nums[0],nums[1]) ;
+                let mut curr = prev1 ;
+                for i in 2..n{
+                    curr = max(prev2+nums[i],prev1) ;
+                    prev2 = prev1 ;
+                    prev1 = curr ;
+                }
+                return curr;
+            }
         }
-        if(dp[i]!=-1){
-            return dp[i] ;
-        }
-        let mut take : i32 = nums[i] + Solution::solve(nums,dp,i+2) ;
-        let mut notTake : i32 = Solution::solve(nums,dp,i+1) ;
-        dp[i] = max(take,notTake) ;
-        dp[i]
-    }
-    pub fn rob(nums: Vec<i32>) -> i32 {
-        let n = nums.len() ;
-        let mut dp : Vec<i32> = vec![-1;n] ;
-        return Solution::solve(&nums,&mut dp,0) ;
-    }
-}
